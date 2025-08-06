@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
-import Addtodo from './components/Addtodo'
-import Todos from './components/Todos'
+// import Addtodo from './components/Addtodo'
+// import Todos from './components/Todos'
 import TicTacToe from './ticToecomponents/ticTocToe/TicTacToe'
 
 function App() {
