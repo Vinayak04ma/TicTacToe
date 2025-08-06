@@ -1,11 +1,8 @@
 import React, { useRef, useState } from 'react'
 import cross_icon from "../Assets/x.png"
 import circle_icon from "../Assets/o.png"
-
-
-let data=["","","","","","","","",""];
-
 function TicTacToe() {
+    let data=useRef(["","","","","","","","",""]);
 let box1=useRef(null);
 let box2=useRef(null);
 let box3=useRef(null);
@@ -24,57 +21,57 @@ const [title, setTitle] = useState(
 );
     let [count,setCount]=useState(0);
     let [lock,setLock]=useState(false);
-    let titleRef=useRef(null);
+
     const toggle=(e,num)=>{
         if(lock){
             return 0;
         }
         if(count%2===0){
             e.target.innerHTML=`<img src='${cross_icon}'>`;
-            data[num]='x';
-            setCount(++count);
+            data.current[num]='x';
+            setCount(prev=>prev+1);
         }
         else{
              e.target.innerHTML=`<img src='${circle_icon}'>`;
-            data[num]='o';
-            setCount(++count);
+            data.current[num]='o';
+            setCount(prev=>prev+1);
 
         }
         checkWin();
 
     }
     const checkWin=()=>{
-        if(data[0]===data[1] && data[1]===data[2] && data[2]!=="")
+        if(data.current[0]===data.current[1] && data.current[1]===data.current[2] && data.current[2]!=="")
         {
-            won(data[0]);
+            won(data.current[0]);
         }
-       else if(data[3]===data[4] && data[4]===data[5] && data[5]!=="")
+       else if(data.current[3]===data.current[4] && data.current[4]===data.current[5] && data.current[5]!=="")
         {
-            won(data[5]);
+            won(data.current[5]);
         }
-         else if(data[0]===data[3] && data[3]===data[6] && data[6]!=="")
+         else if(data.current[0]===data.current[3] && data.current[3]===data.current[6] && data.current[6]!=="")
         {
-            won(data[6]);
+            won(data.current[6]);
         }
-         else if(data[1]===data[4] && data[4]===data[7] && data[7]!=="")
+         else if(data.current[1]===data.current[4] && data.current[4]===data.current[7] && data.current[7]!=="")
         {
-            won(data[7]);
+            won(data.current[7]);
         }
-         else if(data[2]===data[5] && data[5]===data[8] && data[8]!=="")
+         else if(data.current[2]===data.current[5] && data.current[5]===data.current[8] && data.current[8]!=="")
         {
-            won(data[8]);
+            won(data.current[8]);
         }
-         else if(data[0]===data[4] && data[4]===data[8] && data[8]!=="")
+         else if(data.current[0]===data.current[4] && data.current[4]===data.current[8] && data.current[8]!=="")
         {
-            won(data[8]);
+            won(data.current[8]);
         }
-         else if(data[0]===data[1] && data[1]===data[2] && data[2]!=="")
+         else if(data.current[6]===data.current[7] && data.current[7]===data.current[8] && data.current[8]!=="")
         {
-            won(data[2]);
+            won(data.current[8]);
         }
-         else if(data[2]===data[4] && data[4]===data[6] && data[6]!=="")
+         else if(data.current[2]===data.current[4] && data.current[4]===data.current[6] && data.current[6]!=="")
         {
-            won(data[6]);
+            won(data.current[6]);
         }
     }
     const won=(winner)=>{
@@ -96,7 +93,7 @@ const [title, setTitle] = useState(
     }
     const reset=()=>{
         setLock(false);
-        data=["","","","","","","","",""];
+        data.current=["","","","","","","","",""];
         setTitle(
     <h1 className="my-[20px] text-white text-[40px] font-bold flex justify-center items-center">
       Tic Tac Toe Game
